@@ -10,6 +10,7 @@ import com.example.demo.order.OrderService;
 import com.example.demo.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class AppConfig {
@@ -20,7 +21,7 @@ public class AppConfig {
         return new MemberServiceImpl(getMemberRepository());
     }
 
-    @Bean
+    @Bean @Primary
     public MemberRepository getMemberRepository() {
         System.out.println("AppConfig.getMemberRepository");
         return new MemoryMemberRepository();
@@ -31,7 +32,7 @@ public class AppConfig {
         return new OrderServiceImpl(getMemberRepository(), getDiscountPolicy());
     }
 
-    @Bean
+    @Bean @Primary
     public DiscountPolicy getDiscountPolicy() {
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
